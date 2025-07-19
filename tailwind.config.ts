@@ -52,6 +52,14 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				'cta-green': {
+					DEFAULT: 'hsl(var(--cta-green))',
+					foreground: 'hsl(var(--cta-green-foreground))',
+					hover: 'hsl(var(--cta-green-hover))'
+				},
+				'orange-accent': 'hsl(var(--orange-accent))',
+				'hero-dark': 'hsl(var(--hero-dark))',
+				'hero-foreground': 'hsl(var(--hero-foreground))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
