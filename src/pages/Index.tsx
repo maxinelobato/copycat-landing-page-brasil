@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { WhatsappButton } from "@/components/WhatsappButton";
 import { ServiceCard } from "@/components/ServiceCard";
 import { StatCounter } from "@/components/StatCounter";
@@ -7,7 +8,27 @@ import { MessageCircle, MapPin, Phone, Clock, Users, Shield, Headphones } from "
 import heroBackground from "@/assets/hero-background.jpg";
 import lawyerProfessional from "@/assets/lawyer-professional.jpg";
 
+declare global {
+  interface Window {
+    dataLayer: any[];
+  }
+}
+
 const Index = () => {
+  useEffect(() => {
+    // Google Tag Manager
+    const gtmScript = document.createElement('script');
+    gtmScript.async = true;
+    gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXX';
+    document.head.appendChild(gtmScript);
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'gtm.start': new Date().getTime(),
+      event: 'gtm.js'
+    });
+  }, []);
+
   const services = [
     "Contrato com Prestadores de Serviço",
     "Contrato com Fornecedores", 
@@ -33,25 +54,27 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header with floating notification */}
-      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-        <div className="bg-background shadow-lg rounded-full px-6 py-3 flex items-center gap-4 border">
-          <div className="flex items-center gap-3">
-            <img 
-              src={lawyerProfessional} 
-              alt="Advogada" 
-              className="w-12 h-12 rounded-full object-cover"
-            />
-            <div>
-              <div className="font-semibold text-sm">Advogada Disponível</div>
-              <div className="text-sm text-muted-foreground">Atendemos todo Brasil 🇧🇷</div>
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md shadow-lg border-b">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <img 
+                src={lawyerProfessional} 
+                alt="Advogada" 
+                className="w-12 h-12 rounded-full object-cover"
+              />
+              <div>
+                <div className="font-semibold text-sm">Advogada Disponível</div>
+                <div className="text-sm text-muted-foreground">Atendemos todo Brasil 🇧🇷</div>
+              </div>
             </div>
+            <WhatsappButton className="text-sm px-8 py-3">
+              AGENDE SUA CONSULTA<br />AGORA MESMO!
+            </WhatsappButton>
           </div>
-          <WhatsappButton className="text-sm px-4 py-2">
-            AGENDE SUA CONSULTA<br />AGORA MESMO!
-          </WhatsappButton>
         </div>
-      </div>
+      </nav>
 
       {/* Hero Section */}
       <section 
