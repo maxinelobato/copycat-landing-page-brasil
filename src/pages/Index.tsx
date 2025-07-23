@@ -57,7 +57,8 @@ const Index = () => {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md shadow-lg border-b">
         <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
+          {/* Desktop Layout */}
+          <div className="hidden md:flex items-center justify-between">
             <div className="flex items-center gap-4">
               <img 
                 src={lawyerProfessional} 
@@ -70,6 +71,24 @@ const Index = () => {
               </div>
             </div>
             <WhatsappButton className="text-sm px-8 py-3">
+              AGENDE SUA CONSULTA<br />AGORA MESMO!
+            </WhatsappButton>
+          </div>
+          
+          {/* Mobile Layout */}
+          <div className="md:hidden flex flex-col items-center text-center gap-3">
+            <div className="flex items-center gap-3">
+              <img 
+                src={lawyerProfessional} 
+                alt="Advogada" 
+                className="w-10 h-10 rounded-full object-cover"
+              />
+              <div>
+                <div className="font-semibold text-xs">Advogada Disponível</div>
+                <div className="text-xs text-muted-foreground">Atendemos todo Brasil 🇧🇷</div>
+              </div>
+            </div>
+            <WhatsappButton className="text-xs px-6 py-2">
               AGENDE SUA CONSULTA<br />AGORA MESMO!
             </WhatsappButton>
           </div>
