@@ -11,22 +11,49 @@ import lawyerProfessional from "@/assets/lawyer-professional.jpg";
 declare global {
   interface Window {
     dataLayer: any[];
+    gtag: (...args: any[]) => void;
   }
 }
 
 const Index = () => {
   useEffect(() => {
-    // Google Tag Manager
-    const gtmScript = document.createElement('script');
-    gtmScript.async = true;
-    gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXX';
-    document.head.appendChild(gtmScript);
-
+    // Google Tag Manager Configuration
+    const GTM_ID = 'GTM-XXXXXXX'; // Substitua pelo seu ID do GTM
+    
+    // Initialize dataLayer
     window.dataLayer = window.dataLayer || [];
+    
+    // Configure GTM
     window.dataLayer.push({
       'gtm.start': new Date().getTime(),
       event: 'gtm.js'
     });
+    
+    // Create and inject GTM script
+    const gtmScript = document.createElement('script');
+    gtmScript.async = true;
+    gtmScript.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+    document.head.appendChild(gtmScript);
+    
+    // Create and inject noscript fallback
+    const noscript = document.createElement('noscript');
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.googletagmanager.com/ns.html?id=${GTM_ID}`;
+    iframe.height = '0';
+    iframe.width = '0';
+    iframe.style.display = 'none';
+    iframe.style.visibility = 'hidden';
+    noscript.appendChild(iframe);
+    document.body.insertBefore(noscript, document.body.firstChild);
+    
+    // Cleanup function
+    return () => {
+      // Remove GTM script on unmount (opcional)
+      const existingScript = document.querySelector(`script[src*="gtm.js?id=${GTM_ID}"]`);
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
   }, []);
 
   const services = [
